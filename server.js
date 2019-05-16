@@ -8,7 +8,10 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 });
 
-server.listen(3000);
+
+server.listen(3000, function() {
+    condole.log("3000 portov bacec")
+});
 
 grassArr = [];
 grassEaterArr = [];
@@ -20,39 +23,32 @@ patArr = [];
 // gel_avelcav = 0;
 // pat_stexcvav = 0;
 
-var Grass = require("./modules/grass.js");
-var GrassEater = require("./modules/grasseter.js");
-var Gel = require("./modules/gel.js");
-var Pat = require("./modules/pat.js");
+Grass = require("./modules/grass.js");
+GrassEater = require("./modules/grasseter.js");
+Gel = require("./modules/gel.js");
+Pat = require("./modules/pat.js");
 
-let matrix = []; // Մատրիցի ստեղծում
-let rows = 100; // Տողերի քանակ
-let columns = 100; // Սյուների քանակ
+var w = 50;
+var h = 60;
 
-for (let y = 0; y < rows; y++) {
-    matrix[y] = []; // Մատրիցի նոր տողի ստեղծում
-    for (let x = 0; x < columns; x++) {
-        let a = Math.floor(Math.random() * 100);
-        if (a >= 0 && a < 20) {
-            matrix[y][x] = 0; // Մատրիցի 20 տոկոսը կլինի 0
-        }
-        if (a >= 20 && a < 40) {
-            matrix[y][x] = 1; // Մատրիցի 20 տոկոսը կլինի 1
-        }
-        else if (a >= 40 && a < 50) {
-            matrix[y][x] = 2; // Մատրիցի 10 տոկոսը կլինի 2
-        }
-        else if (a >= 50 && a < 70) {
-            matrix[y][x] = 3; // Մատրիցի 20 տոկոսը կլինի 3
-        }
-        else if (a >= 70 && a < 90) {
-            matrix[y][x] = 4; // Մատրիցի 20 տոկոսը կլինի 4
-        }
-        else if (a >= 90 && a < 100) {
-            matrix[y][x] = 5; // Մատրիցի 10 տոկոսը կլինի 5
+function genMatrix(w, h) {
+    var matrix = [];
+    for (var y = 0; y < h; h++){
+        matrix[y] = [];
+        for (varx = 0; x < w; x++){
+            var r = Math.floor(Math.random() * 75);
+            if (r < 20) r = 0;
+            else if (r < 40) r = 1;
+            else if (r < 42) r = 2;
+            else if (r < 75) r = 3;
+            // else if (r < 85) r = 4;
+            // else if (r < 100) r = 5;
         }
     }
+    return matrix;
 }
+
+matrix = genMatrix(w, h);
 
 for (var y = 0; y < matrix.length; ++y) {
     for (var x = 0; x < matrix[y].length; ++x) {
@@ -75,8 +71,9 @@ for (var y = 0; y < matrix.length; ++y) {
         }
     }
 }
-setInterval(drawServerery, 3000)
-function drawServerery() {
+
+
+function drawServerer() {
     for (var i in grassArr) {
         grassArr[i].mul();
     }
@@ -93,3 +90,5 @@ function drawServerery() {
 
     io.sockets.emit("matrix", matrix);
 }
+
+setInterval(drawServerery, 3000);

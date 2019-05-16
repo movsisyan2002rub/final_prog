@@ -1,18 +1,15 @@
 var socket = io();
-
-var h = 40;
-var w = 40;
 var side = 20;
 
 
 
 function setup() {
     frameRate(10);
-    createCanvas(w * side, h * side);
+    createCanvas(20 * side, 20 * side);
     background('#acacac');
 }
 
-socket.on("matrix", function (matrix)) {
+socket.on("matrix", function (matrix) {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
 
@@ -40,3 +37,4 @@ socket.on("matrix", function (matrix)) {
         }
     }
 }
+)

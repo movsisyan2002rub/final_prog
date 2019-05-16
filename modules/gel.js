@@ -1,4 +1,4 @@
-var LivingCreature = require("/modules/harevaniMart.js")
+var LivingCreature = require("./harevaniMart.js")
 
 module.exports = class Gel extends LivingCreature {
     constructor(x, y, index) {
