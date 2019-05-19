@@ -38,7 +38,7 @@ module.exports = class Gel extends LivingCreature {
     }
     move() {
         var emptyCells = this.chooseCells(0);
-        var datarkvandak = random(emptyCells);
+        var datarkvandak = Random(emptyCells);
         if (datarkvandak) {
             var newx = datarkvandak[0];
             var newy = datarkvandak[1];
@@ -58,7 +58,7 @@ module.exports = class Gel extends LivingCreature {
     }
     eat() {
         var xotaker1 = this.chooseCells1(4, 2);
-        var xotaker2 = random(xotaker1);
+        var xotaker2 = Random(xotaker1);
         if (xotaker2) {
             var newX = xotaker2[0];
             var newY = xotaker2[1];
@@ -101,7 +101,7 @@ module.exports = class Gel extends LivingCreature {
     }
     mul() {
         var emptyCells = this.chooseCells(1);
-        var newCell = random(emptyCells);
+        var newCell = Random(emptyCells);
 
         if (newCell) {
             var newX = newCell[0];

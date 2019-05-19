@@ -20,7 +20,7 @@ module.exports = class Pat extends LivingCreature {
     }
     xotavelacnel() {
         var emptyCells = this.chooseCells(0);
-        var newCell = random(emptyCells);
+        var newCell = Random(emptyCells);
 
         if (newCell) {
             var newX = newCell[0];
