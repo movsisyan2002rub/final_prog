@@ -43,18 +43,19 @@ function draw_wheater() {
     if (Wheatherinit == 4) {
         Weather = "Autumn";
     }
-    if (Wheatherinit == 4) {
+    if (Wheatherinit == 3) {
         Weather = "Winter";
     }
-    if (Wheatherinit == 4) {
+    if (Wheatherinit == 2) {
         Weather = "Spiring";
     }
-    if (Wheatherinit == 4) {
+    if (Wheatherinit == 1) {
         Weather = "Summer";
     }
+    io.sockets.emit("exanak", Weather);
 }
 
-io.sockets.emit("exanak", Weather);
+
 
 function genMatrix(w, h) {
     var matrix = [];
@@ -118,4 +119,4 @@ function drawServerer() {
 }
 
 setInterval(drawServerer, 2000);
-setInterval(draw_wheater, 5000);
+setInterval(draw_wheater, 7000);

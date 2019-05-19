@@ -63,7 +63,7 @@ module.exports = class Gel extends LivingCreature {
             var newX = xotaker2[0];
             var newY = xotaker2[1];
             if (matrix[newY][newX] == 4) {
-                console.log(matrix[newY][newX]);
+                
                 this.die();
                 for (var i in patArr) {
                     if (newX == patArr[i].x && newY == patArr[i].y) {
