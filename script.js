@@ -18,7 +18,6 @@ function drawWeather(w) {
     var weather = w;
     console.log(weather);
 
-
     if (weather == "Summer") {
         p.innerText = "Summer";
     } else if (weather == "Winter") {
@@ -43,7 +42,7 @@ function drawMatrix(matrix) {
                 if (weatherclient == "Summer") {
                     fill("green");
                 } else if (weatherclient != "Summer") {
-                    fill("#7CFC00");
+                    fill("#9ACD32");
                 }
                 rect(x * side, y * side, side, side);
             }
@@ -66,5 +65,26 @@ function drawMatrix(matrix) {
 }
 
 
+
 socket.on("matrix", drawMatrix);
 socket.on("exanak", drawWeather);
+
+
+
+function mousePressed() {
+    matrix = [];
+
+    b = 40;
+    e = 40;
+    
+    for (var y = 0; y < b; y++) {
+        for (var x = 0; x < e; x++) {
+            if (x == 20 || x == 21 || y == 19 || y == 20) {
+                matrix[y][x] = 4;
+            }
+            else {
+                matrix[y][x] = Math.floor(Math.random() * 3);
+            }
+        }
+    }
+}

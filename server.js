@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
 app.use(express.static("."));
 
 app.get('/', function (req, res) {
@@ -24,7 +23,7 @@ grassEaterArr = [];
 gelArr = [];
 patArr = [];
 
-Weather = "Summer";
+Weather = "Winter";
 Wheatherinit = 1;
 Grassinit = 0;
 GrassEaterinit = 0;
@@ -62,12 +61,12 @@ function genMatrix(w, h) {
     for (var y = 0; y < h; y++) {
         matrix[y] = [];
         for (var x = 0; x < w; x++) {
-            var r = Math.floor(Math.random() * 95);
+            var r = Math.floor(Math.random() * 76);
             if (r < 20) r = 0;
-            else if (r < 10) r = 1;
-            else if (r < 55) r = 2;
+            else if (r < 50) r = 1;
+            else if (r < 70) r = 2;
             else if (r < 75) r = 3;
-            else if (r < 95) r = 4;
+            else if (r < 76) r = 4;
             // else if (r < 100) r = 5;
             matrix[y][x] = r;
         }
@@ -106,6 +105,8 @@ function drawServerer() {
     }
     for (var i in grassEaterArr) {
         grassEaterArr[i].eat();
+        grassEaterArr[i].move();
+
     }
     for (var i in gelArr) {
         gelArr[i].eat();
@@ -118,5 +119,5 @@ function drawServerer() {
     io.sockets.emit("matrix", matrix);
 }
 
-setInterval(drawServerer, 2000);
-setInterval(draw_wheater, 7000);
+setInterval(drawServerer, 1000);
+setInterval(draw_wheater, 10000);
