@@ -65,26 +65,12 @@ function drawMatrix(matrix) {
 }
 
 
+function patButtom() {
+    socket.emit("pat");
+}
 
 socket.on("matrix", drawMatrix);
 socket.on("exanak", drawWeather);
 
 
 
-function mousePressed() {
-    matrix = [];
-
-    b = 40;
-    e = 40;
-    
-    for (var y = 0; y < b; y++) {
-        for (var x = 0; x < e; x++) {
-            if (x == 20 || x == 21 || y == 19 || y == 20) {
-                matrix[y][x] = 4;
-            }
-            else {
-                matrix[y][x] = Math.floor(Math.random() * 3);
-            }
-        }
-    }
-}

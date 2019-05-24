@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var fs = require('fs');
+
+
 app.use(express.static("."));
 
 app.get('/', function (req, res) {
@@ -23,12 +26,14 @@ grassEaterArr = [];
 gelArr = [];
 patArr = [];
 
+
+
+
 Weather = "Winter";
 Wheatherinit = 1;
 Grassinit = 0;
 GrassEaterinit = 0;
-Gelinit = 0;
-Patinit = 0;
+gelInit = 0;
 
 var w = 50;
 var h = 60;
@@ -57,16 +62,16 @@ function draw_wheater() {
 
 
 function genMatrix(w, h) {
-    var matrix = [];
+    matrix = [];
     for (var y = 0; y < h; y++) {
         matrix[y] = [];
         for (var x = 0; x < w; x++) {
-            var r = Math.floor(Math.random() * 76);
-            if (r < 20) r = 0;
-            else if (r < 50) r = 1;
-            else if (r < 70) r = 2;
-            else if (r < 75) r = 3;
-            else if (r < 76) r = 4;
+            var r = Math.floor(Math.random() * 90);
+            if (r < 40) r = 0;
+            else if (r < 60) r = 1;
+            else if (r < 80) r = 2;
+            else if (r < 85) r = 3;
+            else if (r < 90) r = 4;
             // else if (r < 100) r = 5;
             matrix[y][x] = r;
         }
@@ -102,22 +107,57 @@ for (var y = 0; y < matrix.length; y++) {
 function drawServerer() {
     for (var i in grassArr) {
         grassArr[i].mul();
+        Grassinit++;
     }
     for (var i in grassEaterArr) {
         grassEaterArr[i].eat();
         grassEaterArr[i].move();
-
+        grassEaterArr[i].mul();
+        GrassEaterinit++
     }
     for (var i in gelArr) {
         gelArr[i].eat();
+        gelInit++;
     }
     for (var i in patArr) {
         patArr[i].xotavelacnel();
     }
 
-
     io.sockets.emit("matrix", matrix);
 }
 
+io.on('connection', function (socket) {
+
+    socket.on("pat", function () {
+        var e = 20;
+        var b = 20;
+
+        for (var y = 0; y < e; y++) {
+            matrix[y] = [];
+            for (var x = 0; x < b; x++) {
+                if (x == 9 || x == 10 || y == 10 || y == 11) {
+                    matrix[y][x] = 4;
+                }
+                else {
+                    matrix[y][x] = Math.floor(Math.random() * 2);
+                }
+            }
+        }
+        io.sockets.emit("matrix", matrix);
+    });
+
+
+});
+
+var obj = { "info": [] };
+function main() {
+    var file = "Statistics.json";
+    obj.info.push({ "cnvac xoter@": Grassinit, "cnvac xotakerner@": GrassEaterinit, "cnvac geler@": gelInit });
+    fs.writeFileSync(file, JSON.stringify(obj, null, 5));
+}
+
+
+
 setInterval(drawServerer, 1000);
-setInterval(draw_wheater, 10000);
+setInterval(draw_wheater, 3000);
+setInterval(main, 3000);

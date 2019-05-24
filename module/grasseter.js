@@ -61,10 +61,10 @@ module.exports = class GrassEater extends LivingCreature {
     mul() {
        
         var newCell = Random(this.chooseCells(0));
-        if (this.energy >= 6 && newCell) {
+        if (this.energy >= 20 && newCell) {
             
             var newGrassEater = new GrassEater(newCell[0], newCell[1], this.index);
-            grasseaterArr.push(newGrassEater);
+            grassEaterArr.push(newGrassEater);
             matrix[newCell[1]][newCell[0]] = this.index;
             this.energy = 0;
         }

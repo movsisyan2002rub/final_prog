@@ -119,6 +119,7 @@ module.exports = class Gel extends LivingCreature {
 
         }
     }
+
     die() {
         for (var i in gelArr) {
             if (this.x == gelArr[i].x && gelArr[i].y == this.y) {
