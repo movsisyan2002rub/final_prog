@@ -51,7 +51,7 @@ function draw_wheater() {
         Weather = "Winter";
     }
     if (Wheatherinit == 2) {
-        Weather = "Spiring";
+        Weather = "Spring";
     }
     if (Wheatherinit == 1) {
         Weather = "Summer";
@@ -136,10 +136,10 @@ io.on('connection', function (socket) {
             matrix[y] = [];
             for (var x = 0; x < b; x++) {
                 if (x == 9 || x == 10 || y == 10 || y == 11) {
-                    matrix[y][x] = 4;
+                    matrix[y][x] = 5;
                 }
                 else {
-                    matrix[y][x] = Math.floor(Math.random() * 2);
+                    matrix[y][x] = Math.floor(Math.random() * 3);
                 }
             }
         }
