@@ -66,7 +66,7 @@ function genMatrix(w, h) {
     for (var y = 0; y < h; y++) {
         matrix[y] = [];
         for (var x = 0; x < w; x++) {
-            var r = Math.floor(Math.random() * 90);
+            r = Math.floor(Math.random() * 90);
             if (r < 40) r = 0;
             else if (r < 60) r = 1;
             else if (r < 80) r = 2;
@@ -110,8 +110,8 @@ function drawServerer() {
         Grassinit++;
     }
     for (var i in grassEaterArr) {
-        grassEaterArr[i].eat();
         grassEaterArr[i].move();
+        grassEaterArr[i].eat();
         grassEaterArr[i].mul();
         GrassEaterinit++
     }
@@ -133,13 +133,28 @@ io.on('connection', function (socket) {
         var b = 20;
 
         for (var y = 0; y < e; y++) {
-            matrix[y] = [];
+            matrix[y][x] = [];
             for (var x = 0; x < b; x++) {
-                if (x == 9 || x == 10 || y == 10 || y == 11) {
+                if (x == 10 || y == 9) {
+                    for (var i in grassArr) {
+                        if (x == grassArr[i].x && y == grassArr[i].y) {
+                            grassArr.splice(i, 1);
+                        }
+                    }
+                    for (var i in grassEaterArr) {
+                        if (x == grassEaterArr[i].x && y == grassEaterArr[i].y) {
+                            grassEaterArr.splice(i, 1);
+                        }
+                    }
+                    for (var i in gelArr) {
+                        if (x == gelArr[i].x && y == gelArr[i].y) {
+                            gelArr.splice(i,1);
+                        }
+                    }
                     matrix[y][x] = 5;
                 }
                 else {
-                    matrix[y][x] = Math.floor(Math.random() * 3);
+
                 }
             }
         }

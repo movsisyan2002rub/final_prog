@@ -95,9 +95,7 @@ module.exports = class Gel extends LivingCreature {
                 this.move();
             }
         }
-        else {
-            this.move();
-        }
+
     }
     mul() {
         var emptyCells = this.chooseCells(1);
